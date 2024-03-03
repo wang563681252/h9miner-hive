@@ -1,0 +1,1 @@
+./h9-miner-spacemesh-linux-amd64 -gpuServer -license yes
