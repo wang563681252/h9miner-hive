@@ -1,0 +1,136 @@
+# Plot路径
+# plot path
+path:
+- ""
+
+# 设置miner名称，默认使用电脑名称
+# Set the miner name, the computer name is used by default
+minerName:
+
+# 在https://www.h9.com/pool/spacemesh#config的设备管理中获取
+# Get in the device management of https://www.h9.com/pool/spacemesh#config
+apiKey: ""
+
+# 日志信息
+# Log information
+log:
+  lv: info
+  path: ./log/
+  name: miner.log
+
+# x-proxy 代理配置
+# x-proxy proxy configuration
+url:
+  # 一个局域网内，代理只需要开一台就可以了，如代理所在的机器Ip是192.168.1.88，端口9190
+  # 下面配置改为
+  # proxy: "http://192.168.1.88:9190"
+  # In a local area network, only one proxy is required. For example, the IP of the machine where the proxy is located is 192.168.1.88 and the port is 9190
+  # The following configuration is changed to
+  # proxy: "http://192.168.1.88:9190"
+  proxy: ""
+
+# 开启扫描新文件
+# Enable scanning of new files
+scanPath: false
+
+# 扫描间隔
+# Scan interval
+scanMinute: 60
+
+# 代理配置
+# proxy configuration
+proxy:
+    # E.g http://127.0.0.1:8888 or socks5://127.0.0.1:8888
+    url: ""
+    username: ""
+    password: ""
+
+# parameter settings
+extraParams:
+    # 不填写用全部GPU设备，集成显卡默认也会添加，如果需要排除，需要手动设置设备列表
+    # If not filled in, use all GPU devices. Integrated graphics cards will also be added by default. If you need to exclude, you need to manually set the device list
+    device: ""
+
+    # 文件大小，GB
+    # file size, GB
+    maxFileSize: 32
+
+    # 禁用Plot
+    # Disable Plot
+    disablePlot: false
+
+    # PoST最大实例数，默认为CPU线程数,一个目录占3个左右的CPU核心，如果盘符过多可以限制并发数
+    # The maximum number of PoST instances defaults to the number of CPU threads. One directory occupies about 3 CPU cores. If there are too many drive letters, the number of concurrent instances can be limited.
+    postInstance: 0
+
+    # post 线程数，默认用CPU核数，0用全部线程
+    # post thread number, the default number of CPU cores
+    postThread: 0
+
+    # post 绑定CPU核心开始编号，-1不绑定，如果是双CPU的机器，需要进行绑定，否则可能会出现性能问题
+    # post Binding CPU core starting number, -1 is not bound. If it is a dual-CPU machine, it needs to be bound, otherwise performance problems may occur.
+    postAffinity: -1
+
+    # post 绑定cpu核心递增
+    postAffinityStep: 1
+
+    # postCpuIds 同时设置了postAffinity的话，优先使用postCpuIds。指定绑定具体的核心,cpu核心用','分隔,组用';'分隔。比如12核CPU分4组，有8个目录，每组3核：0,1,2;3,4,5;6,7,8;9,10,11。那么post目录1、5是第一组CPU,目前2、6是第二组CPU,以此类推
+    # postCpuIds If postAffinity is set at the same time, postCpuIds is used first. Specify the specific core to bind, the cpu core is separated by ',', and the group is separated by ';'. For example, a 12-core CPU is divided into 4 groups, there are 8 directories, and each group has 3 cores: 0,1,2; 3,4,5; 6,7,8; 9,10,11. Then post directory 1 and 5 are the first group of CPU, and 2 and 6 are the second group of CPU, and so on
+    postCpuIds: ""
+
+    # randomx 计算线程数，0用全部线程，有多个目录的话，randomx和post是并行状态，如果是双CPU的机器，可以将randomx单独设置到一个CPU上
+    # randomx calculates the number of threads. 0 uses all threads. If there are multiple directories, randomx and post are in parallel state. If it is a dual-CPU machine, randomx can be set to one CPU separately.
+    randomxThread: 0
+
+    # randomx 绑定CPU核心开始编号，-1不绑定
+    randomxAffinity: -1
+
+    # randomx绑定cpu核心递增
+    randomxAffinityStep: 1
+
+    # flags randomx 标识,默认开启fullmem
+    # # flags randomx flag, fullmem is enabled by default
+    flags: fullmem
+
+    # POST 证明过程中并行尝试的随机数数量，建议不要低于128，如果单个文件大于1T的，建议设置256或者288
+    # The number of random numbers tried in parallel during the POST certification process is recommended not to be lower than 128. If a single file is larger than 1T, it is recommended to set 256 or 288
+    nonces: 128
+
+    # 一个numUnits是64Gib
+    # One numUnits is 64Gib
+    numUnits: 15
+
+    # 预留磁盘空间大小，单位GiB
+    # Reserved disk space size, unit GiB
+    reservedSize: 1
+
+    # 是否禁用InitPoST
+    # Whether to disable InitPoST
+    disableInitPost: true
+
+    # 跳过未完成Initialized PoST的目录，在有多个目录的情况下，可以设置为true，加快初始化过程和P盘速度
+    # Skip the directory that has not completed Initialized PoST. In the case of multiple directories, you can set it to true to speed up the initialization process and P disk speed
+    skipUninitialized: false
+
+    # 同时plot的目录数，一个实例占3G左右的显存，一般来说显卡速度大于单块硬盘写入速度才需要设置多个实例
+    # The number of directories plotted at the same time, an instance occupies about 3G of video memory. Generally speaking, the speed of the graphics card is greater than the write speed of a single hard disk, so multiple instances need to be set
+    plotInstance: 1
+
+    # disablePoST 禁用PoST扫盘
+    disablePoST: true
+
+    # removeInitFailed 自动删除初始化失败的post文件夹，删除后不可恢复，谨慎填写
+    # Automatically delete the post folder that failed to initialize. After deletion, it cannot be recovered. Fill in carefully
+    removeInitFailed: false
+
+    # 加载失败文件自动删除，删除后不可恢复，谨慎填写
+    # Automatically delete the failed file to load, it cannot be recovered after deletion, fill in carefully
+    deleteLoadFail: false
+
+    # GPU服务列表，例如：192.168.2.10:10088
+    # GPU service list, for example: 192.168.2.10:10088
+    #server:
+
+    # GPU服务监听的端口
+    # The port that the GPU service listens on
+    serverPort: 10088
